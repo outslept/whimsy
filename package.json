@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@9.15.4",
-  "description": "lipgloss",
+  "description": "Minimalistic library for creating charming CLI interfaces inspired by Charmbracelet",
   "license": "MIT",
   "funding": "https://github.com/sponsors/gnify",
   "homepage": "https://github.com/gnify/whimsy#readme",
