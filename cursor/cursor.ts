@@ -136,6 +136,7 @@ class CursorModel {
             const cleanup = this.blinkContext.start(this.blinkSpeed, () => {
                 resolve({ type: 'blink', id: currentId, tag: currentTag });
             });
+            cleanup()
         });
     }
 
