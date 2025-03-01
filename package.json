@@ -5,13 +5,13 @@
   "packageManager": "pnpm@9.15.4",
   "description": "Minimalistic library for creating charming CLI interfaces inspired by Charmbracelet",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/gnify",
-  "homepage": "https://github.com/gnify/whimsy#readme",
+  "funding": "https://github.com/sponsors/outslept",
+  "homepage": "https://github.com/outslept/whimsy#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gnify/whimsy.git"
+    "url": "git+https://github.com/outslept/whimsy.git"
   },
-  "bugs": "https://github.com/gnify/whimsy/issues",
+  "bugs": "https://github.com/outslept/whimsy/issues",
   "keywords": [
     "cli",
     "terminal",

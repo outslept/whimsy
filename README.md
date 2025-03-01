@@ -12,4 +12,4 @@ PRs are welcome! Please follow the [contributing guidelines](./CONTRIBUTING.md).
 
 ## License
 
-[MIT](./LICENSE) License © [gnify](https://github.com/gnify)
+[MIT](./LICENSE) License © [outslept](https://github.com/outslept)
