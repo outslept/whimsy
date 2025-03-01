@@ -15,7 +15,7 @@ Rune provides elegant text sanitization for CLI apps. Part of the Whimsy.
 ## Basic Usage
 
 ```typescript
-import { Rune } from '@whimsy/rune'
+import { Rune } from '#'
 
 // Create a sanitizer with default options
 const sanitizer = new Rune()
@@ -74,7 +74,7 @@ const config = sanitizer.getOptions()
 ### Basic Sanitization
 
 ```typescript
-import { Rune } from '@whimsy/rune'
+import { Rune } from '#'
 
 const sanitizer = new Rune()
 const result = sanitizer.sanitize('Hello\tWorld\r\nWith\u0000Control\u001BChars')
@@ -86,7 +86,7 @@ console.log(result)
 ### HTML-Safe Output
 
 ```typescript
-import { Rune } from '@whimsy/rune'
+import { Rune } from '#'
 
 const htmlSanitizer = new Rune({
   replaceNewLine: '<br>',
@@ -101,7 +101,7 @@ console.log(html)
 ### Custom Character Replacements
 
 ```typescript
-import { Rune } from '@whimsy/rune'
+import { Rune } from '#'
 
 const customSanitizer = new Rune({
   customReplacements: new Map([
@@ -118,7 +118,7 @@ console.log(result)
 ### Terminal Output Cleaning
 
 ```typescript
-import { Rune } from '@whimsy/rune'
+import { Rune } from '#'
 
 const terminalSanitizer = new Rune({
   stripVTControlSequences: true
