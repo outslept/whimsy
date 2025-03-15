@@ -55,7 +55,7 @@ importers:
         version: 3.5.0(typescript@5.7.3)
       vite:
         specifier: ^6.0.7
-        version: 6.0.7(@types/node@22.10.6)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0)
+        version: 6.2.2(@types/node@22.10.6)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0)
       vitest:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.10.6)
@@ -3185,8 +3185,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.0.7:
-    resolution: {integrity: sha512-RDt8r/7qx9940f8FcOIAH9PTViRrghKaK2K1jY3RaAURrEUbm9Du1mJ72G+jlhtG3WwodnfzY8ORQZbBavZEAQ==}
+  vite@6.2.2:
+    resolution: {integrity: sha512-yW7PeMM+LkDzc7CgJuRLMW2Jz0FxMOsVJ8Lv3gpgW9WLcb9cTW+121UEr1hvmfR7w3SegR5ItvYyzVz1vxNJgQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -6485,11 +6485,11 @@ snapshots:
       '@types/node': 22.10.6
       fsevents: 2.3.3
 
-  vite@6.0.7(@types/node@22.10.6)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0):
+  vite@6.2.2(@types/node@22.10.6)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0):
     dependencies:
-      esbuild: 0.24.2
-      postcss: 8.4.49
-      rollup: 4.30.1
+      esbuild: 0.25.1
+      postcss: 8.5.3
+      rollup: 4.35.0
     optionalDependencies:
       '@types/node': 22.10.6
       fsevents: 2.3.3
