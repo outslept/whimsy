@@ -64,7 +64,7 @@
     "bumpp": "^9.10.1",
     "eslint": "^9.20.1",
     "eslint-plugin-format": "^1.0.1",
-    "globals": "^15.14.0",
+    "globals": "^16.0.0",
     "lint-staged": "^15.3.0",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
