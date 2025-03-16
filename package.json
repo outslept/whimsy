@@ -2,7 +2,7 @@
   "name": "whimsy",
   "type": "module",
   "version": "0.0.0",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.6.3",
   "description": "Minimalistic library for creating charming CLI interfaces inspired by Charmbracelet",
   "license": "MIT",
   "funding": "https://github.com/sponsors/outslept",
