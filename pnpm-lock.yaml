@@ -13,7 +13,7 @@ importers:
         version: 4.10.1(@typescript-eslint/utils@8.27.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.22.0(jiti@2.4.2)))(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)(vitest@3.0.9(@types/debug@4.1.12)(@types/node@22.13.10)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0))
       '@antfu/ni':
         specifier: ^24.0.0
-        version: 24.2.0
+        version: 24.3.0
       '@types/node':
         specifier: ^22.10.6
         version: 22.13.10
@@ -111,8 +111,8 @@ packages:
   '@antfu/install-pkg@1.0.0':
     resolution: {integrity: sha512-xvX6P/lo1B3ej0OsaErAjqgFYzYVcJpamjLAFLYh9vRJngBrMoUG7aVnrGTeqM7yxbyTD5p3F2+0/QUEh8Vzhw==}
 
-  '@antfu/ni@24.2.0':
-    resolution: {integrity: sha512-+B9wzpv+KOhqbOgHjHcBAX7IwIKdDt4SFzYlxIPr4srANFJfjAABC7nU8KNFba+DYLymRe2EPSUfE7+reJb5UA==}
+  '@antfu/ni@24.3.0':
+    resolution: {integrity: sha512-wBSav4mBxvHEW9RbdSo1SWLQ6MAlT0Dc423weC58yOWqW4OcMvtnNDdDrxOZeJ88fEIyPK93gDUWIelBxzSf8g==}
     hasBin: true
 
   '@babel/code-frame@7.26.2':
@@ -2251,6 +2251,9 @@ packages:
   package-manager-detector@1.0.0:
     resolution: {integrity: sha512-7elnH+9zMsRo7aS72w6MeRugTpdRvInmEB4Kmm9BVvPw/SLG8gXUGQ+4wF0Mys0RSWPz0B9nuBbDe8vFeA2sfg==}
 
+  package-manager-detector@1.1.0:
+    resolution: {integrity: sha512-Y8f9qUlBzW8qauJjd/eu6jlpJZsuPJm2ZAV0cDVd420o4EdpH5RPdoCv+60/TdJflGatr4sDfpAL6ArWZbM5tA==}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -2737,6 +2740,9 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
+  tinyexec@1.0.0:
+    resolution: {integrity: sha512-djtKaAR3lnRo0uMT/IKYwj3s4E86IE/SdwCE3XXIJcozbDFKsfgAmi8IBIpIDmTd0Y6YKyfqo3vQ33OloPJPaQ==}
+
   tinyglobby@0.2.12:
     resolution: {integrity: sha512-qkf4trmKSIiMTs/E63cxH+ojC2unam7rJ0WrauAzpT3ECNTxGRMlaXxVbfxMUC/w0LaYk6jQ4y/nGR9uBO3tww==}
     engines: {node: '>=12.0.0'}
@@ -3018,12 +3024,12 @@ snapshots:
       package-manager-detector: 0.2.11
       tinyexec: 0.3.2
 
-  '@antfu/ni@24.2.0':
+  '@antfu/ni@24.3.0':
     dependencies:
       ansis: 3.17.0
       fzf: 0.5.2
-      package-manager-detector: 1.0.0
-      tinyexec: 0.3.2
+      package-manager-detector: 1.1.0
+      tinyexec: 1.0.0
 
   '@babel/code-frame@7.26.2':
     dependencies:
@@ -5293,6 +5299,8 @@ snapshots:
 
   package-manager-detector@1.0.0: {}
 
+  package-manager-detector@1.1.0: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -5751,6 +5759,8 @@ snapshots:
   tinybench@2.9.0: {}
 
   tinyexec@0.3.2: {}
+
+  tinyexec@1.0.0: {}
 
   tinyglobby@0.2.12:
     dependencies:
