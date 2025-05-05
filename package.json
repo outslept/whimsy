@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@10.8.1",
-  "description": "Minimalistic library for creating charming CLI interfaces inspired by Charmbracelet",
+  "description": "Minimalistic library for creating charming CLI interfaces",
   "license": "MIT",
   "funding": "https://github.com/sponsors/outslept",
   "homepage": "https://github.com/outslept/whimsy#readme",
@@ -16,8 +16,7 @@
     "cli",
     "terminal",
     "tui",
-    "interface",
-    "charm"
+    "interface"
   ],
   "sideEffects": false,
   "exports": {
@@ -26,14 +25,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
@@ -45,35 +36,26 @@
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "clean": "node scripts/clean.js",
-    "prepublishOnly": "nr build",
-    "release": "bumpp && nr publish",
-    "start": "tsx src/index.ts",
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks",
-    "inspect:eslint": "nlx @eslint/config-inspector",
+    "inspect:eslint": "pnpx @eslint/config-inspector",
     "inspect:modules": "pnpx node-modules-inspector"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
-    "@antfu/ni": "^24.0.0",
-    "@types/node": "^22.10.6",
-    "bumpp": "^10.0.0",
+    "@oxc-node/core": "^0.0.27",
+    "@types/node": "^22.14.0",
     "eslint": "^9.20.1",
-    "eslint-plugin-format": "^1.0.1",
-    "globals": "^16.0.0",
     "lint-staged": "^15.3.0",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
     "simple-git-hooks": "^2.11.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.21.0",
     "unbuild": "^3.3.1",
-    "vite": "^6.0.7",
     "vitest": "^3.0.0"
   },
   "simple-git-hooks": {
@@ -81,5 +63,9 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "ansis": "^3.17.0",
+    "fast-string-width": "^1.1.0"
   }
 }
