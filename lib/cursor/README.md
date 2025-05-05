@@ -1,254 +1,93 @@
-# Wink
+# Cursor
 
-A flexible, terminal cursor component for CLI apps. Part of Whimsy.
+A flexible, terminal cursor component for CLI applications.
 
 ## Features
 
-- **Customizable blinking cursor** - Control speed, appearance, and behavior
-- **Multiple cursor modes** - Support for blinking, static, and hidden cursor states
-- **Terminal styling** - Rich styling options for cursor appearance
-- **Focus-aware** - Automatically handles focus and blur events
-- **High performance** - Optimized for smooth rendering in terminal applications
-- **TypeScript ready** - Full type definitions included
-
-## Basic Usage
-
-```typescript
-import { CursorMode, TerminalStyle, Wink } from '#'
-
-// Create a cursor with default options
-const cursor = new Wink()
-
-// Focus the cursor and start blinking
-const [_, command] = cursor.update({ type: 'focus' })
-
-// Render the cursor in your terminal app
-process.stdout.write(cursor.view());
-
-// Handle blink updates
-(async () => {
-  while (true) {
-    if (command) {
-      const msg = await command();
-      [_, command] = cursor.update(msg)
-      // Re-render cursor when it blinks
-      process.stdout.write(`\b${cursor.view()}`)
-    }
-    else {
-      await new Promise(resolve => setTimeout(resolve, 100))
-    }
-  }
-})()
-```
+- **Customizable Blinking:** Control blink speed, character, and styles.
+- **Multiple Modes:** Supports `'blink'`, `'static'`, and `'hide'` modes.
+- **Rich Styling:** Leverages `ansis` for full terminal color and style support.
+- **Focus-Aware:** Manages blinking state based on focus.
+- **Callback for Updates:** Provides an `onUpdate` hook for redraws during blinking.
+- **TypeScript Ready:** Fully typed for robust development.
 
 ## API Reference
 
 ### Cursor Modes
 
-```typescript
-enum CursorMode {
-  Blink = 0, // Cursor blinks when focused
-  Static = 1, // Cursor remains visible but doesn't blink
-  Hide = 2 // Cursor is hidden
-}
+A string union defining the cursor's behavior:
+
+```ts
+type CursorMode = 'blink' | 'static' | 'hide';
 ```
 
-### Creating a Cursor
+- `'blink'`: Cursor blinks when focused.
+- `'static'`: Cursor remains visible (using `style`) but doesn't blink.
+- `'hide'`: Cursor is not rendered.
 
-```typescript
+## Creating a Cursor
+
+```ts
+import c from 'ansis';
+import { Cursor } from './cursor';
+
 // Basic cursor with default options
-const cursor = new Wink()
+const cursor1 = new Cursor();
 
-// Cursor with custom options
-const cursor = new Wink({
-  blinkSpeed: 600,
-  char: '█',
-  style: TerminalStyle.create().color(33),
-  textStyle: TerminalStyle.create(),
-  mode: CursorMode.Blink
-})
+const cursor2 = new Cursor({
+  blinkSpeed: 600,          // Blink interval in ms
+  char: '▋',                // Cursor character
+  style: c.cyan.inverse,    // Style when "on" or static
+  textStyle: c.cyan.dim,    // Style when "off" during blink
+  mode: 'blink',            // Initial mode
+  onUpdate: () => { /* Redraw UI */ } // Callback for blink updates
+});
 ```
 
 ### Cursor Options
 
-| Option       | Type            | Default               | Description                           |
-| ------------ | --------------- | --------------------- | ------------------------------------- |
-| `blinkSpeed` | `number`        | `530`                 | Blink interval in milliseconds        |
-| `char`       | `string`        | `' '`                 | Character to display as cursor        |
-| `style`      | `TerminalStyle` | `new TerminalStyle()` | Style for cursor when highlighted     |
-| `textStyle`  | `TerminalStyle` | `new TerminalStyle()` | Style for cursor when not highlighted |
-| `mode`       | `CursorMode`    | `CursorMode.Blink`    | Cursor behavior mode                  |
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `blinkSpeed` | `number` | `530` | Blink interval in milliseconds. |
+| `char` | `string` | `' '` | Character to display. Takes the first char. |
+| `style` | `Ansis` | `c.reset.inverse` | Style for the cursor when "on" or static. |
+| `textStyle` | `Ansis` | `c.reset` | Style for the cursor when "off" during blink. |
+| `mode` | `CursorMode` | `'blink'` | Initial cursor behavior mode. |
+| `onUpdate` | `() => void` | `undefined` | Callback invoked when blink state changes view. |
 
-### Terminal Styling
+## Methods
 
-```typescript
-// Create a style
-const style = TerminalStyle.create()
-  .color(33) // Set foreground color (ANSI color code)
-  .bgColor(44) // Set background color
-  .bold(true) // Make text bold
-  .reverse(true) // Reverse colors
-  .inline(true) // Don't reset style after rendering
+```ts
+// Set the cursor's behavior mode ('blink', 'static', 'hide')
+cursor.setMode('static');
 
-// Apply style to text
-const styledText = style.render('Hello')
+// Inform the cursor whether it has focus (activates/deactivates blinking)
+cursor.setFocus(true);
+
+// Check if the cursor currently has focus
+const focused: boolean = cursor.isFocused();
+
+// Set the main style (when "on" or static) using an ansis instance
+cursor.setStyle(c.red.bold.inverse);
+
+// Set the secondary style (when "off" during blink)
+cursor.setTextStyle(c.red.dim);
+
+// Change the character displayed by the cursor
+cursor.setChar('|');
+
+// Adjust the blink rate in milliseconds
+cursor.setBlinkSpeed(400);
+
+// Get the current configuration options
+const options = cursor.getOptions();
+
+// Get the ANSI string for the cursor's current visual state
+const displayString: string = cursor.view();
+
+// Reset the internal blink state and stop timers
+cursor.reset();
+
+// Get the current mode
+const mode: CursorMode = cursor.getMode();
 ```
-
-### Update Messages
-
-```typescript
-// Message types for cursor updates
-type WinkMsg =
-  | { type: 'initialBlink' }
-  | { type: 'blink', id: number, tag: number }
-  | { type: 'blinkCanceled' }
-  | { type: 'focus' }
-  | { type: 'blur' }
-  | { type: 'updateOptions', options: Partial<CursorOptions> }
-```
-
-### Methods
-
-```typescript
-// Update cursor state based on a message
-const [updatedCursor, command] = cursor.update({ type: 'focus' })
-
-// Get cursor display string
-const cursorDisplay = cursor.view()
-
-// Set cursor mode
-cursor.setMode(CursorMode.Static)
-
-// Get current options
-const options = cursor.getOptions()
-
-// Reset cursor state
-cursor.reset()
-
-// Check if cursor is focused
-const isFocused = cursor.isFocused()
-
-// Get current mode
-const mode = cursor.getMode()
-```
-
-## Examples
-
-### Simple Text Editor
-
-```typescript
-import { CursorMode, TerminalStyle, Wink } from '#'
-
-async function simpleEditor() {
-  // Create cursor
-  const cursor = new Wink({
-    char: '█',
-    style: TerminalStyle.create().color(46)
-  })
-
-  let text = ''
-  let position = 0
-  let [_, command] = cursor.update({ type: 'focus' })
-
-  // Render function
-  function render() {
-    process.stdout.write('\x1B[2J\x1B[0;0H') // Clear screen
-    const display = text.slice(0, position)
-      + cursor.view()
-      + text.slice(position)
-    process.stdout.write(`Editor: ${display}\n`)
-  }
-
-  // Handle keyboard input
-  process.stdin.setRawMode(true)
-  process.stdin.on('data', (key) => {
-    if (key === '\u0003')
-      process.exit() // Ctrl+C
-    if (key === '\u007F') { // Backspace
-      if (position > 0) {
-        text = text.slice(0, position - 1) + text.slice(position)
-        position--
-      }
-    }
-    else if (key.length === 1) {
-      text = text.slice(0, position) + key + text.slice(position)
-      position++
-    }
-    render()
-  })
-
-  // Cursor update loop
-  render()
-  while (true) {
-    if (command) {
-      const msg = await command();
-      [_, command] = cursor.update(msg)
-      render()
-    }
-    else {
-      await new Promise(resolve => setTimeout(resolve, 100))
-    }
-  }
-}
-
-simpleEditor()
-```
-
-### Customizing Cursor Appearance
-
-```typescript
-import { CursorMode, TerminalStyle, Wink } from '#'
-
-// Create a custom block cursor
-const blockCursor = new Wink({
-  char: '█',
-  style: TerminalStyle.create().color(196), // Bright red
-  blinkSpeed: 400 // Faster blinking
-})
-
-// Create an underscore cursor
-const underscoreCursor = new Wink({
-  char: '_',
-  style: TerminalStyle.create().color(51), // Cyan
-  blinkSpeed: 700 // Slower blinking
-})
-
-// Create a static cursor (non-blinking)
-const staticCursor = new Wink({
-  char: '|',
-  style: TerminalStyle.create().bold(true).color(226), // Bold yellow
-  mode: CursorMode.Static
-})
-```
-
-### Changing Cursor Properties
-
-```typescript
-import { CursorMode, Wink } from '#'
-
-const cursor = new Wink()
-
-// Update multiple options at once
-cursor.update({
-  type: 'updateOptions',
-  options: {
-    blinkSpeed: 800,
-    char: '▌',
-    mode: CursorMode.Blink
-  }
-})
-
-// Change just the cursor mode
-cursor.setMode(CursorMode.Static)
-
-// Later, hide the cursor
-cursor.setMode(CursorMode.Hide)
-```
-
-## License
-
-MIT
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
