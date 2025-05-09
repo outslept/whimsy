@@ -45,7 +45,7 @@
     "inspect:modules": "pnpx node-modules-inspector"
   },
   "dependencies": {
-    "ansis": "^3.17.0",
+    "ansis": "^4.0.0",
     "fast-string-width": "^1.1.0"
   },
   "devDependencies": {
